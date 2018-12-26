@@ -1,7 +1,5 @@
 package com.kd.dataserver.domain;
 
-//import lombok.Data;
-
 import lombok.Data;
 
 import java.util.Date;
@@ -12,11 +10,10 @@ import java.util.Date;
  */
 @Data
 public class Log {
+    private String level;
+    private String type;
+    private String msg;
     private Date time;
     private String ip;
-    private String type;
-    private String username;
-    private String id;
-    private String team;
-    private String cd;
+    private User user;
 }
