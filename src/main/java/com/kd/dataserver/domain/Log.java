@@ -10,10 +10,12 @@ import java.util.Date;
  */
 @Data
 public class Log {
+    private Integer logId;
     private String level;
     private String type;
     private String msg;
     private Date time;
     private String ip;
     private User user;
+    private Integer userId;
 }
