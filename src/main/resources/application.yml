@@ -40,5 +40,5 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: top.chuckfang.bean
+  type-aliases-package: com.kd.dataserver.domain
 
