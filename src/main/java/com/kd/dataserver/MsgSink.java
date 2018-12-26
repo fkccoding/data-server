@@ -7,6 +7,9 @@ import org.springframework.cloud.stream.messaging.Sink;
 
 @EnableBinding(Sink.class)
 public class MsgSink {
+
+	//TODO 监听input通道，然后存到数据库中
+
 	@StreamListener(Sink.INPUT)
 	public void messageSink(Log log) {
 		System.out.println("Received: " + log);
