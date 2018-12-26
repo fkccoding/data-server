@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: data-server
+  cloud:
+    stream:
+      instance-count: 1 #应用程序部署的实例数量
+      instance-index: 0 #应用程序实例的索引
+      kafka:
+        binder:
+          brokers: 192.100.1.111:9092
+          zk-nodes: 192.100.1.111:2181
+          min-partition-count: 1
+          auto-create-topics: true
+          auto-add-partitions: true
+      bindings:
+        input:
+          destination: Log
+#          group: log-client #消费组，保证同一消费组中的消息只会有一个消费者实例接收和处理
+          consumer:
+            concurrency: 1  #输入通道消费组的并发数
+            partitioned: false  #来自消息生产者的数据是否采用了分区
+#          content-type: application/json
+eureka:
+  instance:
+    hostname: 192.100.1.231
+  client:
+    service-url:
+      defaultZone: http://192.100.1.111:8761/eureka/
+server:
+  port: 9001
+
