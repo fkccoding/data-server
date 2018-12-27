@@ -17,5 +17,4 @@ public class Log {
     private Date time;
     private String ip;
     private User user;
-    private Integer userId;
 }
