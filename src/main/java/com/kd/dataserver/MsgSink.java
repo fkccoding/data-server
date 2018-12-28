@@ -5,9 +5,11 @@ import com.kd.dataserver.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.cloud.stream.messaging.Sink;
+import org.springframework.messaging.handler.annotation.SendTo;
 
-@EnableBinding(Sink.class)
+@EnableBinding(Processor.class)
 public class MsgSink {
 
     @Autowired
@@ -15,10 +17,12 @@ public class MsgSink {
 
 	//TODO 监听input通道，然后存到数据库中
 
-	@StreamListener(Sink.INPUT)
-	public void messageSink(Log log) {
+	@StreamListener(Processor.INPUT)
+    @SendTo(Processor.OUTPUT)
+	public boolean messageSink(Log log) {
 		System.out.println("Received: " + log);
         boolean insert = dataService.insert(log);
-        System.out.println(insert?"插入成功":"插入失败");
+        System.out.println("插入"+(insert?"成功":"失败"));
+        return insert;
     }
 }
