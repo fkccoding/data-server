@@ -19,7 +19,7 @@ public interface UserMapper {
 
     List<User> selectByExample(UserExample example);
 
-    User selectById(Integer id);
+    User selectById(Long id);
 
     int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
 

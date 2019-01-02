@@ -1,12 +1,14 @@
 package com.kd.dataserver.service.impl;
 
 import com.kd.dataserver.domain.Log;
+import com.kd.dataserver.domain.User;
 import com.kd.dataserver.mapper.LogMapper;
 import com.kd.dataserver.mapper.UserMapper;
 import com.kd.dataserver.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -23,9 +25,16 @@ public class DataServiceImpl implements DataService {
     UserMapper userMapper;
 
     @Override
+//    @Transactional(propagation = Propagation.REQUIRED)
     public boolean insert(Log log) {
-        if (userMapper.selectById(log.getUser().getId()) == null) {//如果user表里面没有记录则插入
-            userMapper.insertSelective(log.getUser());
+        User user = log.getUser();
+        Long userId = user.getId();
+        if (userId <= 0) {
+            System.out.println("user_id = " + userId + "，userId不合法");
+            return false;
+        }
+        if (userMapper.selectById(userId) == null) {//如果user表里面没有记录则插入
+            userMapper.insert(user);
         }
         int i = logMapper.insertSelective(log);
         return i==1;

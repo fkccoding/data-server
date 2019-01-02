@@ -1,7 +1,9 @@
 package com.kd.dataserver.domain;
 
 import lombok.Data;
+import org.springframework.data.elasticsearch.annotations.Document;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,8 +11,9 @@ import java.util.Date;
  * @Date: 2018/12/24 15:35
  */
 @Data
-public class Log {
-    private Integer logId;
+@Document(indexName = "logs",type = "log")
+public class Log implements Serializable {
+    private Long id;
     private String level;
     private String type;
     private String msg;
