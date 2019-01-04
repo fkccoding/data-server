@@ -11,7 +11,7 @@ import java.util.Date;
  * @Date: 2018/12/24 15:35
  */
 @Data
-@Document(indexName = "logs",type = "log")
+@Document(indexName = "logs")
 public class Log implements Serializable {
     private Long id;
     private String level;

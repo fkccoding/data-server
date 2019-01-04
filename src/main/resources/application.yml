@@ -33,6 +33,10 @@ spring:
   data:
     elasticsearch:
       cluster-nodes: 127.0.0.1:9300
+#      cluster-nodes: 127.0.0.1:9300, 192.100.1.60:9300, 192.100.1.16:9300, 192.100.1.17:9300
+#      cluster-nodes: 192.100.1.16:9300
+      repositories:
+        enabled: true
 
 
 eureka:

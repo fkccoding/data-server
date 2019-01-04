@@ -14,11 +14,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DataServiceImpl_elastricserach implements DataService {
+    
     @Autowired
     LogRepository logRepository;
 
     @Autowired
     UserRepository userRepository;
+
     @Override
     public boolean insert(Log log) {
         User user = log.getUser();
