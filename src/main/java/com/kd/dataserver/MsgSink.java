@@ -13,7 +13,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 @EnableBinding(Processor.class)
 public class MsgSink {
 
-    Logger logger = LoggerFactory.getLogger(MsgSink.class);
+    private Logger logger = LoggerFactory.getLogger(MsgSink.class);
 
     // TODO 后续可以读取配置文件的信息，来决定使用哪一个持久化层
     // 使用elastricsearch存储
