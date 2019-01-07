@@ -6,6 +6,7 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="company" jdbcType="VARCHAR" property="company" />
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -35,6 +36,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause">
     <where>
       <foreach collection="example.oredCriteria" item="criteria" separator="or">
@@ -64,35 +66,18 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List">
     id, username, company
   </sql>
-  <select id="selectByExample" parameterType="com.kd.dataserver.domain.UserExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.kd.dataserver.domain.UserExample">
-    delete from t_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+
   <insert id="insert" parameterType="com.kd.dataserver.domain.User">
     insert into t_user (id, username, company
       )
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.kd.dataserver.domain.User">
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -118,40 +103,8 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.kd.dataserver.domain.UserExample" resultType="java.lang.Long">
-    select count(*) from t_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_user
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
-      </if>
-      <if test="record.company != null">
-        company = #{record.company,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_user
-    set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      company = #{record.company,jdbcType=VARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 
-  <select id="selectById" parameterType="Integer" resultMap="BaseResultMap">
+  <select id="selectById" parameterType="long" resultMap="BaseResultMap">
     select * from t_user where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

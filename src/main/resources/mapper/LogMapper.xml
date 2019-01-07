@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kd.dataserver.mapper.LogMapper">
   <resultMap id="BaseResultMap" type="com.kd.dataserver.domain.Log">
-    <result column="log_id" jdbcType="INTEGER" property="logId" />
+    <result column="id" jdbcType="INTEGER" property="id" />
     <result column="level" jdbcType="VARCHAR" property="level" />
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="msg" jdbcType="VARCHAR" property="msg" />
@@ -12,6 +12,7 @@
                  select="com.kd.dataserver.mapper.UserMapper.selectById"></association>
     <!--<result column="user_id" jdbcType="INTEGER" property="userId" />-->
   </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -41,6 +42,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause">
     <where>
       <foreach collection="example.oredCriteria" item="criteria" separator="or">
@@ -70,42 +72,25 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List">
     log_id, level, type, msg, time, ip, user_id
   </sql>
-  <select id="selectByExample" parameterType="com.kd.dataserver.domain.LogExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_log
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="com.kd.dataserver.domain.LogExample">
-    delete from t_log
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
+
   <insert id="insert" parameterType="com.kd.dataserver.domain.Log">
-    insert into t_log (log_id, level, type, 
+    insert into t_log (id, level, type,
       msg, time, ip, user_id
       )
-    values (#{logId,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{level,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
       #{msg,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, #{user.id,jdbcType=INTEGER}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.kd.dataserver.domain.Log">
     insert into t_log
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="logId != null">
-        log_id,
+      <if test="id != null">
+        id,
       </if>
       <if test="level != null">
         level,
@@ -127,8 +112,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="logId != null">
-        #{logId,jdbcType=INTEGER},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         #{level,jdbcType=VARCHAR},
@@ -150,49 +135,5 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.kd.dataserver.domain.LogExample" resultType="java.lang.Long">
-    select count(*) from t_log
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update t_log
-    <set>
-      <if test="record.logId != null">
-        log_id = #{record.logId,jdbcType=INTEGER},
-      </if>
-      <if test="record.level != null">
-        level = #{record.level,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
-      </if>
-      <if test="record.msg != null">
-        msg = #{record.msg,jdbcType=VARCHAR},
-      </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.ip != null">
-        ip = #{record.ip,jdbcType=VARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update t_log
-    set log_id = #{record.logId,jdbcType=INTEGER},
-      level = #{record.level,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
-      msg = #{record.msg,jdbcType=VARCHAR},
-      time = #{record.time,jdbcType=TIMESTAMP},
-      ip = #{record.ip,jdbcType=VARCHAR},
---       user_id = #{record.userId,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
+
 </mapper>
