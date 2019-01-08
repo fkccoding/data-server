@@ -2,6 +2,7 @@ package com.kd.dataserver;
 
 import com.kd.dataserver.domain.Log;
 import com.kd.dataserver.service.impl.DataServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.messaging.handler.annotation.SendTo;
 
+
 @EnableBinding(Processor.class)
+@Slf4j
 public class MsgSink {
 
     private Logger logger = LoggerFactory.getLogger(MsgSink.class);
